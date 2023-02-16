@@ -1,2 +1,2 @@
-# alx-low_level_programming
+# Low level Programming
 Learning to program in C
