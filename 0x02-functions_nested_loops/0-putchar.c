@@ -1,7 +1,9 @@
 #include "main.h"
 
 /*
- * Desc: prints _putchar
+ * main - prints _putchar and then a newline
+ *
+ * Return: Always 0 (Success)
  */
 
 int main(void)

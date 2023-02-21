@@ -2,7 +2,7 @@
 #define MAIN_H
 
 /**
- * _putchar - writes the character c to stdout
+ * Desc: _putchar - writes the character c to stdout
  */
 
 int _putchar(char c);
