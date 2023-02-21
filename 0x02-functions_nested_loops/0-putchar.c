@@ -1,11 +1,13 @@
 #include "main.h"
 
-/*
- * main - prints _putchar and then a newline
+/**
+ * main - Entry point for the program
  *
- * Return: Always 0 (Success)
+ * Description: This program takes two integers as command-line arguments
+ *              and prints their sum to the standard output.
+ *
+ * Return: 0 on success, non-zero on error.
  */
-
 int main(void)
 {
 	_putchar('_');
@@ -16,7 +18,6 @@ int main(void)
 	_putchar('h');
 	_putchar('a');
 	_putchar('r');
-	_putchar('\n');
 
 	return (0);
 }
