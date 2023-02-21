@@ -3,8 +3,7 @@
 /**
  * main - Entry point for the program
  *
- * Description: This program takes two integers as command-line arguments
- *              and prints their sum to the standard output.
+ * Description: prints the _putchar then a new line 
  *
  * Return: 0 on success, non-zero on error.
  */
