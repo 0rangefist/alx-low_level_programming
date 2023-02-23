@@ -9,11 +9,12 @@ int main(void)
 {
 	int      largest_prime_factor;
 	long int number;
+	int i;
 
 	largest_prime_factor = 0;
 	number               = 612852475143;
 
-	for (int i = 2; i <= number; i++)
+	for (i = 2; i <= number; i++)
 	{
 		if (number % i == 0)
 		{
@@ -22,7 +23,6 @@ int main(void)
 		}
 	}
 
-	printf("The largest prime factor of %ld is %d\n", number,
-		   largest_prime_factor);
-	return 0;
+	printf("%d\n", largest_prime_factor);
+	return (0);
 }
