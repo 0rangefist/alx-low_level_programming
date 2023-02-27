@@ -24,7 +24,7 @@ void puts2(char *str)
 	}
 
 	/* print every other character*/
-	for (i = 0; i <= length; i += 2)
+	for (i = 0; i < length; i += 2)
 	{
 		_putchar(str[i]);
 	}
