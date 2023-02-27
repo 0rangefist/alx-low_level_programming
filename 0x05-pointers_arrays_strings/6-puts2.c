@@ -11,8 +11,8 @@
 
 void puts2(char *str)
 {
-	int  length;
-	int  i;
+	int length;
+	int i;
 
 	i      = 0;
 	length = 0;
@@ -28,4 +28,6 @@ void puts2(char *str)
 	{
 		_putchar(str[i]);
 	}
+
+	_putchar('\n');
 }
