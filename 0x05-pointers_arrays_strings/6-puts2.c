@@ -13,7 +13,6 @@ void puts2(char *str)
 {
 	int  length;
 	int  i;
-	char tmp;
 
 	i      = 0;
 	length = 0;
