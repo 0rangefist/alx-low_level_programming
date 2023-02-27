@@ -9,17 +9,16 @@
  */
 int main(void)
 {
-	int i;
+	int  i;
+	int  random;
 	int len;
-	int random;
+	char password[100];
 
 	len = 100;
 
-	char password[len + 1];
-
 	srand(time(NULL));
 
-	for (i = 0; i < len; i++)
+	for (i = 0; i < 100; i++)
 	{
 		random = rand() % 62;
 		if (random < 26)
