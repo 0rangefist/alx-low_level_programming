@@ -15,7 +15,7 @@ void _puts(char *str)
 
 	length = 0;
 	/* Find the length of the string */
-	while (*s++)
+	while (*str++)
 	{
 		length++;
 	}
