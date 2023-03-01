@@ -24,7 +24,7 @@ char *_strncpy(char *dest, char *src, int n)
 
 	/* if n is greater than 0, continue counting down till 0,  */
 	/* filling the remaining n chars of dest with \0 */
-	for(; n > 0; dest_ptr++, n--)
+	for (; n > 0; dest_ptr++, n--)
 	{
 		*dest_ptr = '\0';
 	}
