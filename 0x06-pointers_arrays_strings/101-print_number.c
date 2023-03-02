@@ -9,7 +9,6 @@
  */
 void print_number(int n)
 {
-	char sign;
 	int  num_of_digits;
 	int  n_copy;
 	int  i;
@@ -19,13 +18,8 @@ void print_number(int n)
 
 	n_copy        = n;
 	num_of_digits = 0;
-	/* get the num of digits of integer */
-	while (n_copy != 0)
-	{
-		num_of_digits++;
-		n_copy /= 10;
-	}
-	if (n == 0)
+
+	if (!n)
 	{
 		_putchar('0');
 		return;
@@ -33,10 +27,15 @@ void print_number(int n)
 	if (n < 0)
 	{
 		n    = -n;
-		sign = '-';
-		_putchar(sign);
+		_putchar('-');
 	}
 
+	/* get the num of digits of integer */
+	while (n_copy != 0)
+	{
+		num_of_digits++;
+		n_copy /= 10;
+	}
 	/* Iterate from the highest digit to the lowest digit*/
 	for (i = num_of_digits; i > 0; i--)
 	{
