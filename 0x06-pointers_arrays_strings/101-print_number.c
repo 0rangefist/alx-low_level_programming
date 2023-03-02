@@ -16,7 +16,6 @@ void print_number(int n)
 	char digit;
 	int  divisor;
 
-	n_copy        = n;
 	num_of_digits = 0;
 
 	if (!n)
@@ -26,9 +25,10 @@ void print_number(int n)
 	}
 	if (n < 0)
 	{
-		n    = -n;
+		n = -n;
 		_putchar('-');
 	}
+	n_copy = n;
 
 	/* get the num of digits of integer */
 	while (n_copy != 0)
@@ -36,6 +36,7 @@ void print_number(int n)
 		num_of_digits++;
 		n_copy /= 10;
 	}
+
 	/* Iterate from the highest digit to the lowest digit*/
 	for (i = num_of_digits; i > 0; i--)
 	{
