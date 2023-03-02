@@ -14,7 +14,7 @@ char *rot13(char *s)
 	char *cipher_ptr;
 
 	char chars[]  = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ";
-	char cipher[] = "mMnNoOpPqQrRsStTuUvVwWxXyYzZaAbBcCdDeEfFgGhHiIjJkKlL";
+	char cipher[] = "nNoOpPqQrRsStTuUvVwWxXyYzZaAbBcCdDeEfFgGhHiIjJkKlLmM";
 
 	s_ptr = s;
 	while (*s_ptr != '\0')
