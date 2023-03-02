@@ -1,18 +1,14 @@
-i#include <stdio.h>
-#include <string.h>
+#include <stdio.h>
 
 /**
- * infinite_add - Adds two positive numbers represented as strings
+ * print_buffer - Prints the contents of a buffer
  *
- * @n1: First number as a string
- * @n2: Second number as a string
- * @r: Buffer to store the result
- * @size_r: Size of the buffer
+ * @b: Pointer to buffer
+ * @size: Size of buffer in bytes
  *
- * Return: Pointer to the result, or 0 if the result cannot be stored in the
- * buffer
+ * Return: void
  */
-char *infinite_add(char *n1, char *n2, char *r, int size_r)
+void print_buffer(char *b, int size)
 {
-	return (r); /* return pointer to result string */
+	/* implementation goes here */
 }
