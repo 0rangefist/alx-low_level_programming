@@ -9,9 +9,6 @@
  */
 void print_number(int n)
 {
-	char buffer[20]; /* maximum 20 digits */
-	int  i = 0, j;
-
 	/* handle negative numbers */
 	if (n < 0)
 	{
@@ -19,15 +16,10 @@ void print_number(int n)
 		n = -n;
 	}
 
-	/* convert integer to string */
-	do {
-		buffer[i++] = n % 10 + '0';
-		n /= 10;
-	} while (n);
-
-	/* reverse the string */
-	for (j = i - 1; j >= 0; j--)
+	if (n / 10)
 	{
-		_putchar(buffer[j]);
+		print_number(n / 10);
 	}
+
+	_putchar((n % 10) + '0');
 }
