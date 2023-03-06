@@ -14,7 +14,6 @@ void print_chessboard(char (*a)[8])
 
 	if (sizeof(*a) != 8 * 8)
 	{
-		printf("Error: input array is not 8x8\n");
 		return;
 	}
 
