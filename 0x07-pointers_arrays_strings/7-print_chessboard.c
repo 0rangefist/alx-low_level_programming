@@ -12,8 +12,9 @@ void print_chessboard(char (*a)[8])
 	int row;
 	int col;
 
-	if (sizeof(*a) != 8 * 8)
+	if (sizeof(*a) != 8)
 	{
+		_putchar('\n');
 		return;
 	}
 
