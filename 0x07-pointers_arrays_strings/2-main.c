@@ -8,14 +8,20 @@
  */
 int main(void)
 {
-    char *s = "a";
+    char *s = "hello\0world";
     char *f;
 
-    f = _strchr(s, 'l');
+    f = _strchr(s, '\0');
 
     if (f != NULL)
     {
         printf("%s\n", f);
     }
+
+    if (f == NULL)
+    {
+        printf("The character was not found in the string '%s'.\n", s);
+    }
+
     return (0);
 }

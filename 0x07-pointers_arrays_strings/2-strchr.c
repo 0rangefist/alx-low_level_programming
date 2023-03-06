@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdio.h>
 
 /**
  * _strchr -  locates a character in a string
@@ -21,5 +20,13 @@ char *_strchr(char *s, char c)
 		}
 		s_ptr++;
 	}
-	return (NULL); /* return NULL */
+
+	/* Check if c is the null character and return */
+	/* return a pointer to the end of thestring */
+	if (*s_ptr == c)
+	{
+		return (s_ptr);
+	}
+
+	return (0); /* return NULL */
 }
