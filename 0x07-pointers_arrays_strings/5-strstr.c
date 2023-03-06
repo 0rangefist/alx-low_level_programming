@@ -18,15 +18,19 @@ char *_strstr(char *haystack, char *needle)
 	/*scan through haystack */
 	while (*haystack != '\0')
 	{
+		if (*needle == '\0')
+			return (0);
 		/* look for the 1st char of needle within haystack */
-		if (*needle == *haystack)
+		else if (*needle == *haystack)
 		{
 			/* start comparing needle with haystack*/
 			haystack_cpy = haystack;
 			needle_cpy   = needle;
 			while (*needle_cpy != '\0')
 			{
-				if (*haystack_cpy != *needle_cpy)
+				if (*haystack_cpy == '\0')
+					return (0);
+				else if (*haystack_cpy != *needle_cpy)
 				{
 					break;
 				}
