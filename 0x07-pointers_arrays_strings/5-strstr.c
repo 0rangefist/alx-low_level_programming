@@ -28,9 +28,7 @@ char *_strstr(char *haystack, char *needle)
 			needle_cpy   = needle;
 			while (*needle_cpy != '\0')
 			{
-				if (*haystack_cpy == '\0')
-					return (0);
-				else if (*haystack_cpy != *needle_cpy)
+				if (*haystack_cpy != *needle_cpy)
 				{
 					break;
 				}
