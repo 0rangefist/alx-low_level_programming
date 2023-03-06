@@ -19,7 +19,7 @@ char *_strstr(char *haystack, char *needle)
 	while (*haystack != '\0')
 	{
 		if (*needle == '\0')
-			return (0);
+			return (haystack);
 		/* look for the 1st char of needle within haystack */
 		else if (*needle == *haystack)
 		{
