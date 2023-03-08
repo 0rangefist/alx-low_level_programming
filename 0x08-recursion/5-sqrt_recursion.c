@@ -33,7 +33,7 @@ int _sqrt_recursion(int n)
  */
 int _sqrt_recursive_helper(int n, int start, int end)
 {
-	int mid = (start + end) / 2;
+	long int mid = (start + end) / 2;
 
 	if (start > end)
 	{
