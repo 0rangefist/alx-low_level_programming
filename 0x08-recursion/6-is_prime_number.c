@@ -30,7 +30,6 @@ int is_prime_number(int n)
  *
  * @n: number to check for primality
  * @div: divisor to check
- * @limit: limit of the search
  *
  * Return: 1 if n is prime, 0 otherwise
  */
