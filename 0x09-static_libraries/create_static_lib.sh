@@ -4,7 +4,5 @@
 gcc -Wall -Werror -Wextra -pedantic -c *.c
 
 # Create the static library
-ar rcs liball.a *.o
+ar rc liball.a *.o
 
-# Clean up the .o files
-rm *.o
