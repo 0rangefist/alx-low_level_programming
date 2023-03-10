@@ -11,7 +11,7 @@
  */
 int main(int argc, char *argv[])
 {
-	long sum		  = 0;
+	unsigned long sum		  = 0;
 	int bad_input = 0;
 	int i;
 
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 			return (1);
 		}
 
-		printf("%li\n", sum);
+		printf("%lu\n", sum);
 	}
 
 	return (0);
