@@ -11,9 +11,9 @@
  */
 int main(int argc, char *argv[])
 {
-	unsigned long sum		  = 0;
-	int bad_input = 0;
-	int i;
+	unsigned long sum = 0;
+	int			  i;
+	char		 *char_ptr;
 
 	if (argc == 1)
 	{
@@ -23,20 +23,19 @@ int main(int argc, char *argv[])
 	{
 		for (i = 1; i < argc; i++)
 		{
-			if (!(*argv[i] >= '0' && *argv[i] <= '9'))
+			/*detect each char in each argv string */
+			char_ptr = argv[i];
+			while (*char_ptr != '\0')
 			{
-				bad_input = 1;
-				break;
+				if (!(*char_ptr >= '0' && *char_ptr <= '9'))
+				{
+					printf("Error\n");
+					return (1);
+				}
+				char_ptr++;
 			}
 			sum = sum + atoi(argv[i]);
 		}
-
-		if (bad_input)
-		{
-			printf("Error\n");
-			return (1);
-		}
-
 		printf("%lu\n", sum);
 	}
 
