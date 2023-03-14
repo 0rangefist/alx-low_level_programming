@@ -5,18 +5,18 @@
 /**
  * argstostr - concatenates all the arguments of your program
  *
- * @grid: the 2d array
- * @height: height of the 2d array
+ * @ac: argument count
+ * @av: argument value
  *
- * Return: pointer to the 2d array or NULL on failure
+ * Return: pointer to new string or NULL on failure
  */
 char *argstostr(int ac, char **av)
 {
-	char		*string;
-	unsigned int i;
-	unsigned int j;
-	unsigned int k;
-	unsigned int total_len = 0;
+	char *string;
+	int	  i;
+	int	  j;
+	int	  k;
+	int	  total_len = 0;
 
 	if (ac == 0 || av == NULL)
 		return (NULL);
@@ -30,8 +30,8 @@ char *argstostr(int ac, char **av)
 	}
 	string = malloc((total_len + 1) * sizeof(char));
 	/* +1 is for the null byte at the end of the output string */
-	
-	if(string == NULL) /* on allocation failure */
+
+	if (string == NULL) /* on allocation failure */
 		return (NULL);
 	/*copy the chars from each argument into string */
 	k = 0; /* index for output string */
