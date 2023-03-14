@@ -40,7 +40,7 @@ char *str_concat(char *s1, char *s2)
 
 	/* continue copy of s2 into str_cat from where len1 left off */
 	for (i = len1; i < len1 + len2; i++)
-		str_cat[i] = s2[i];
+		str_cat[i] = s2[i - len1];
 
 	str_cat[i] = '\0';
 	return (str_cat);
