@@ -51,12 +51,13 @@ char **strtow(char *str)
 	int	   len_of_word	  = 0;
 	int	   i			  = 0;
 
-	if (str == NULL || *str == '\0') /* if str is null or empty */
-		return (NULL);
+	if (str == NULL || *str == '\0' || (*str == ' ' && *(str + 1) == '\0'))
+		return (NULL); /* if str is null, empty or " " */
 	for (; *ptr != '\0'; ptr++) /* scan through the string till the null byte */
 	{
 		if (*ptr != ' ' && (*(ptr + 1) == ' ' || *(ptr + 1) == '\0'))
 			num_of_words++; /* count number of words in string */
+		return (NULL);
 	}
 	/* allocate memory for the word array (+1 for assigning null at the end) */
 	word_array = malloc((num_of_words + 1) * sizeof(char *));
@@ -71,9 +72,7 @@ char **strtow(char *str)
 				ptr++; /* incrementing ptr to the end of a word */
 			/* allocate memory for a word string, + 1 is for the null byte */
 			len_of_word = ptr - ptr_word_start; /* num of chars of word */
-			if (len_of_word == 0) /* if string is empty space */
-				return (NULL);
-			word = malloc((len_of_word + 1) * sizeof(char));
+			word		= malloc((len_of_word + 1) * sizeof(char));
 			if (word == NULL) /* on allocation failure */
 				return (NULL);
 			_strncpy(word, ptr_word_start, len_of_word);
