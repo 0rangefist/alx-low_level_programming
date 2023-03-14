@@ -42,6 +42,6 @@ char *str_concat(char *s1, char *s2)
 	for (i = len1; i < len1 + len2; i++)
 		str_cat[i] = s2[i];
 
-	str_cpy[i] = '\0';
+	str_cat[i] = '\0';
 	return (str_cat);
 }
