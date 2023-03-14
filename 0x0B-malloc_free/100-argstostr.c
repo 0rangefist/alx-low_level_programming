@@ -12,18 +12,18 @@
  */
 char *argstostr(int ac, char **av)
 {
-	char *string;
-	int	  i;
-	int	  j;
-	int	  k;
-	int	  total_len = 0;
+	char		 *string;
+	unsigned long i;
+	unsigned long j;
+	unsigned long k;
+	unsigned long total_len = 0;
 
 	if (ac == 0 || av == NULL)
 		return (NULL);
 
 	/* find total length to allocate to new string */
 	/* by summing the lengths of each argument */
-	for (i = 0; i < ac; i++)
+	for (i = 0; i < (unsigned long) ac; i++)
 	{
 		total_len = total_len + strlen(av[i]) + 1;
 		/* +1 is for a newline char added after each arg */
@@ -35,7 +35,7 @@ char *argstostr(int ac, char **av)
 		return (NULL);
 	/*copy the chars from each argument into string */
 	k = 0; /* index for output string */
-	for (i = 0; i < ac; i++)
+	for (i = 0; i < (unsigned long) ac; i++)
 	{
 		for (j = 0; j < strlen(av[i]); j++)
 		{
