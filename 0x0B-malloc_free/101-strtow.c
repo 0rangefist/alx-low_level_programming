@@ -49,6 +49,9 @@ int count_words(char *str)
 	while (*ptr == ' ')
 		ptr++;
 
+	if (*ptr == '\0') /* if the string only contains spaces */
+		return (NULL);
+
 	/* count number of words in string */
 	while (*ptr != '\0')
 	{
