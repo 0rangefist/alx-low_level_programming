@@ -18,7 +18,8 @@ char *argstostr(int ac, char **av)
 	unsigned long k;
 	unsigned long total_len = 0;
 
-	if (ac == 0 || av == NULL) return (NULL);
+	if (ac == 0 || av == NULL)
+		return (NULL);
 
 	/* find total length to allocate to new string */
 	/* by summing the lengths of each argument */
