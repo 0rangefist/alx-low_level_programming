@@ -1,7 +1,6 @@
 #include "main.h"
 #include <stdlib.h>
 #include <string.h>
-
 /**
  * _strncpy - copies a string
  *
@@ -35,6 +34,44 @@ char *_strncpy(char *dest, char *src, int n)
 }
 
 /**
+ * count_words - counts the number of words in a string
+ *
+ * @str: string to count words in
+ *
+ * Return: number of words in string
+ */
+int count_words(char *str)
+{
+	int	  num_of_words = 0;
+	char *ptr		   = str;
+
+	/* skip leading spaces */
+	while (*ptr == ' ')
+		ptr++;
+
+	/* count number of words in string */
+	while (*ptr != '\0')
+	{
+		/* skip consecutive spaces */
+		while (*ptr == ' ')
+			ptr++;
+
+		/* check for end of string */
+		if (*ptr == '\0')
+			break;
+
+		/* found start of a word */
+		num_of_words++;
+
+		/* skip to end of word */
+		while (*ptr != ' ' && *ptr != '\0')
+			ptr++;
+	}
+
+	return (num_of_words);
+}
+
+/**
  * strtow -  a function that splits a string into words
  *
  * @str: original string of words
@@ -45,40 +82,39 @@ char **strtow(char *str)
 {
 	char **word_array;
 	char  *word;
-	char  *ptr			  = str;
-	char  *ptr_word_start = str;
-	int	   num_of_words	  = 0;
-	int	   len_of_word	  = 0;
-	int	   i			  = 0;
+	char  *ptr			= str;
+	int	   num_of_words = 0;
+	int	   len_of_word	= 0;
+	int	   i			= 0;
 
-	if (str == NULL || *str == '\0' || (*str == ' ' && *(str + 1) == '\0'))
-		return (NULL); /* if str is null, empty or " " */
-	for (; *ptr != '\0'; ptr++) /* scan through the string till the null byte */
-	{
-		if (*ptr != ' ' && (*(ptr + 1) == ' ' || *(ptr + 1) == '\0'))
-			num_of_words++; /* count number of words in string */
+	if (str == NULL || *str == '\0') /* if str is null or empty */
 		return (NULL);
-	}
+
+	num_of_words = count_words(str);
+
 	/* allocate memory for the word array (+1 for assigning null at the end) */
 	word_array = malloc((num_of_words + 1) * sizeof(char *));
 	if (word_array == NULL) /* on allocation failure */
 		return (NULL);
-	for (ptr = str; *ptr != '\0'; ptr++) /* reset ptr back to start */
-	{ /* extract each word from string and store in the word array */
-		if (*ptr != ' ') /* if we havent hit a space delimiter */
-		{
-			ptr_word_start = ptr; /* save pointer to start of a word */
-			while (*ptr != ' ' && *ptr != '\0')
-				ptr++; /* incrementing ptr to the end of a word */
-			/* allocate memory for a word string, + 1 is for the null byte */
-			len_of_word = ptr - ptr_word_start; /* num of chars of word */
-			word		= malloc((len_of_word + 1) * sizeof(char));
-			if (word == NULL) /* on allocation failure */
-				return (NULL);
-			_strncpy(word, ptr_word_start, len_of_word);
-			word[len_of_word] = '\0'; /* null byte at end of word */
-			word_array[i++]	  = word; /* place the word in word array */
-		}
+
+	/* extract each word from string and store in the word array */
+	for (ptr = str; *ptr != '\0'; )
+	{
+		while (*ptr == ' ') /* skip leading spaces */
+			ptr++;
+		if (*ptr == '\0') /* check for end of string */
+			break;
+		/* allocate memory for a word string, + 1 is for the null byte */
+		len_of_word = 0;
+		while (*(ptr + len_of_word) != ' ' && *(ptr + len_of_word) != '\0')
+			len_of_word++;
+		word = malloc((len_of_word + 1) * sizeof(char));
+		if (word == NULL) /* on allocation failure */
+			return (NULL);
+		_strncpy(word, ptr, len_of_word); /* copy word into buffer */
+		word[len_of_word] = '\0'; /*add null byte at end of word */
+		word_array[i++] = word; /* add word to array */
+		ptr = ptr + len_of_word; /* skip to end of word */
 	}
 	word_array[i] = NULL; /* NULL placed at very end of array */
 	return (word_array);
