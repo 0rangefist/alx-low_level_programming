@@ -42,11 +42,8 @@ char *argstostr(int ac, char **av)
 			k++;
 		}
 
-		if (i != (unsigned long) ac - 1) /* if we are not on the last arg */
-		{
-			string[k] = '\n'; /* add newline after arg */
-			k++;
-		}
+		string[k] = '\n'; /* add newline after arg */
+		k++;
 	}
 	/* add null byte at end of output string */
 	string[k] = '\0';
