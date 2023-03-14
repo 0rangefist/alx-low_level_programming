@@ -62,9 +62,8 @@ char **strtow(char *str)
 	word_array = malloc((num_of_words + 1) * sizeof(char *));
 	if (word_array == NULL) /* on allocation failure */
 		return (NULL);
-	/* extract each word from string and store in the word array */
 	for (ptr = str; *ptr != '\0'; ptr++) /* reset ptr back to start */
-	{
+	{ /* extract each word from string and store in the word array */
 		if (*ptr != ' ') /* if we havent hit a space delimiter */
 		{
 			ptr_word_start = ptr; /* save pointer to start of a word */
@@ -72,7 +71,9 @@ char **strtow(char *str)
 				ptr++; /* incrementing ptr to the end of a word */
 			/* allocate memory for a word string, + 1 is for the null byte */
 			len_of_word = ptr - ptr_word_start; /* num of chars of word */
-			word		= malloc((len_of_word + 1) * sizeof(char));
+			if (len_of_word == 0) /* if string is empty space */
+				return (NULL);
+			word = malloc((len_of_word + 1) * sizeof(char));
 			if (word == NULL) /* on allocation failure */
 				return (NULL);
 			_strncpy(word, ptr_word_start, len_of_word);
