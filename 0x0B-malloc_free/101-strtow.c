@@ -94,6 +94,8 @@ char **strtow(char *str)
 		return (NULL);
 
 	num_of_words = count_words(str);
+	if (num_of_words == 0) /* if str == " " */
+		return (NULL);
 
 	/* allocate memory for the word array (+1 for assigning null at the end) */
 	word_array = malloc((num_of_words + 1) * sizeof(char *));
