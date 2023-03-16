@@ -54,8 +54,7 @@ char *multiply(char *num1, char *num2)
 
 	if (result == NULL)
 	{
-		printf("Error\n");
-		exit(98);
+		return (NULL);
 	}
 	/* multiply the two numbers digit by digit */
 	for (i = len1 - 1; i >= 0; i--)
