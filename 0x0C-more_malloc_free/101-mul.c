@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 
 /**
  * check_num - check if string is a positive number
@@ -87,6 +88,7 @@ char *multiply(char *num1, char *num2)
 int main(int argc, char *argv[])
 {
 	char *result;
+	int res;
 
 	/* check that we have correct num of inputs */
 	if (argc != 3)
@@ -102,15 +104,21 @@ int main(int argc, char *argv[])
 		exit(98);
 	}
 
+	res = atoi(argv[1]) * atoi(argv[2]);
 	/* multiplication of the 2 positive numbers */
-	result = multiply(argv[1], argv[2]);
-	if (result == NULL)
+	if (__builtin_mul_overflow(atoi(argv[1]), atoi(argv[2]), &res))
 	{
-		printf("Error\n");
-		exit(98);
+		result = multiply(argv[1], argv[2]);
+		if (result == NULL)
+		{
+			printf("Error\n");
+			exit(98);
+		}
+		printf("%s\n", result);
 	}
-
-	printf("%s\n", result);
-
+	else
+	{
+		printf("%d\n", (atoi(argv[1]) * atoi(argv[2])));
+	}
 	return (0);
 }
