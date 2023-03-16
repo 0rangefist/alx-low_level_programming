@@ -16,6 +16,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
 	unsigned int min_size;
 	void		*new_ptr;
+	unsigned int i;
 
 	if (new_size == old_size) /* no reallocation needed */
 		return (ptr);
@@ -25,7 +26,6 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 		free(ptr);
 		return (NULL);
 	}
-
 	if (ptr == NULL) /* go ahead & allocate new memory if no valid old memory */
 	{
 		ptr = malloc(new_size);
@@ -47,10 +47,10 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 		min_size = old_size;
 
 	/* copy content over from previous allocation */
-	memcpy(new_ptr, ptr, min_size);
-
+	for (i = 0; i < min_size; i++)
+		*((char *) new_ptr + i) = *((char *) ptr + i);
+		
 	/* free up old memory */
 	free(ptr);
-	
 	return (new_ptr);
 }
