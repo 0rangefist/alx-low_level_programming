@@ -1,6 +1,7 @@
 #include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /**
  * check_num - check if string is a positive number
@@ -28,6 +29,56 @@ int check_num(char *string)
 }
 
 /**
+ * multiply - multiply two arbitrarily long positive numbers
+ *
+ * @num1: first number
+ * @num2: second number
+ *
+ * Return: the result of the multiplication as a string
+ */
+char *multiply(char *num1, char *num2)
+{
+	int	  i;
+	int	  j;
+	int	  carry;
+	char *trimmed;
+	int	  len1 = strlen(num1);
+	int	  len2 = strlen(num2);
+	int product;
+	/* allocate memory for the result */
+	char *result = malloc(sizeof(*result) * (len1 + len2 + 1));
+
+	for (i = 0; i < len1 + len2; i++) /* set each element in memory to 0 */
+		result[i] = '0';
+	result[len1 + len2] = '\0'; /* set last element to null byte */
+
+	if (result == NULL)
+	{
+		printf("Error\n");
+		exit(98);
+	}
+	/* multiply the two numbers digit by digit */
+	for (i = len1 - 1; i >= 0; i--)
+	{
+		carry = 0;
+		for (j = len2 - 1; j >= 0; j--)
+		{
+			product = (num1[i] - '0') * (num2[j] - '0')
+						  + (result[i + j + 1] - '0') + carry;
+			result[i + j + 1] = (product % 10) + '0';
+			carry			  = product / 10;
+		}
+		result[i] = result[i] + carry;
+	}
+	/* remove leading zeros */
+	trimmed = result;
+	while (*trimmed == '0' && *(trimmed + 1) != '\0')
+		trimmed++;
+	/* return the result as a string */
+	return (trimmed);
+}
+
+/**
  * main - Entry point
  *
  * @argc: argument count
@@ -52,7 +103,7 @@ int main(int argc, char *argv[])
 	}
 
 	/* print the multiplication of the 2 positive numbers */
-	printf("%d\n", (atoi(argv[1]) * atoi(argv[2])));
+	printf("%s\n", multiply(argv[1], argv[2]));
 
 	return (0);
 }
