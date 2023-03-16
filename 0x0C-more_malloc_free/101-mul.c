@@ -53,10 +53,8 @@ char *multiply(char *num1, char *num2)
 		result[i] = '0';
 	result[len1 + len2] = '\0'; /* set last element to null byte */
 
-	if (result == NULL)
-	{
-		exit(98);
-	}
+	if (result == NULL)/*on allocation fail*/
+		return (NULL);
 	/* multiply the two numbers digit by digit */
 	for (i = len1 - 1; i >= 0; i--)
 	{
@@ -88,6 +86,8 @@ char *multiply(char *num1, char *num2)
  */
 int main(int argc, char *argv[])
 {
+	char *result;
+
 	/* check that we have correct num of inputs */
 	if (argc != 3)
 	{
@@ -101,15 +101,16 @@ int main(int argc, char *argv[])
 		printf("Error\n");
 		exit(98);
 	}
-	
-	if (*(argv[1]) == '\0' || *(argv[2]) == '\0')
-	{
-		printf("0\n");
-		return (0);
-	}
 
-	/* print the multiplication of the 2 positive numbers */
-	printf("%s\n", multiply(argv[1], argv[2]));
+	/* multiplication of the 2 positive numbers */
+	result = multiply(argv[1], argv[2]);
+	if (result == NULL) 
+	{
+		printf("Error\n");
+		exit(98);
+	}
+	
+	printf("%s\n", result);
 
 	return (0);
 }
