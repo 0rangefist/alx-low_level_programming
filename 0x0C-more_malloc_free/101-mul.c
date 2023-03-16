@@ -45,6 +45,7 @@ char *multiply(char *num1, char *num2)
 	int	  len1 = strlen(num1);
 	int	  len2 = strlen(num2);
 	int product;
+
 	/* allocate memory for the result */
 	char *result = malloc(sizeof(*result) * (len1 + len2 + 1));
 
@@ -54,7 +55,7 @@ char *multiply(char *num1, char *num2)
 
 	if (result == NULL)
 	{
-		return (NULL);
+		exit(98);
 	}
 	/* multiply the two numbers digit by digit */
 	for (i = len1 - 1; i >= 0; i--)
@@ -99,6 +100,12 @@ int main(int argc, char *argv[])
 	{
 		printf("Error\n");
 		exit(98);
+	}
+	
+	if (*(argv[1]) == '\0' || *(argv[2]) == '\0')
+	{
+		printf("0\n");
+		return (0);
 	}
 
 	/* print the multiplication of the 2 positive numbers */
