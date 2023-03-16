@@ -118,7 +118,7 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		printf("%lu\n", (unsigned long)((atoi(argv[1]) * atoi(argv[2]))));
+		printf("%lu\n", (unsigned long)((atol(argv[1]) * atol(argv[2]))));
 	}
 	return (0);
 }
