@@ -104,12 +104,12 @@ int main(int argc, char *argv[])
 
 	/* multiplication of the 2 positive numbers */
 	result = multiply(argv[1], argv[2]);
-	if (result == NULL) 
+	if (result == NULL)
 	{
 		printf("Error\n");
 		exit(98);
 	}
-	
+
 	printf("%s\n", result);
 
 	return (0);
