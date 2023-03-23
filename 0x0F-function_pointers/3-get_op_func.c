@@ -12,16 +12,18 @@ int (*get_op_func(char *s))(int, int)
 {
 	op_t ops[] = {{"+", op_add}, {"-", op_sub}, {"*", op_mul},
 				  {"/", op_div}, {"%", op_mod}, {NULL, NULL}};
-	int	 i;
+	int	 i = 0;
 
 	/* check for the operation char, s[0] in ops[]*/
-	for (i = 0; i < 6; i++)
+	while (i < 6)
 	{
 		if (s[0] == ops[i].op[0])
 		{
 			/* return the function at index that made a match */
 			return (ops[i].f);
 		}
+
+		i++;
 	}
 
 	/* return NULL if no match was made */

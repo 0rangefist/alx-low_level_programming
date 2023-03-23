@@ -1,6 +1,7 @@
 #include "3-calc.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /**
  * main - Entry point
@@ -35,10 +36,17 @@ int main(int argc, char *argv[])
 
 	/* if the operator contains more than one char, or if the function */
 	/* ptr returned (saved in "operation") is NULL, then it's a bad input */
-	if (operator[1] || operation == NULL)
+	if (strlen(operator) > 1 || operation == NULL)
 	{
 		printf("Error\n");
 		exit(99);
+	}
+
+	/* if user tries to divide or modulo by 0, bad input */
+	if ((operator[0] == '/' || operator[0] == '%') && num2 == 0)
+	{
+		printf("Error\n");
+		exit(100);
 	}
 
 	/* with the right operation function, run and print its result*/

@@ -1,6 +1,4 @@
 #include "3-calc.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 /**
  * op_add - adds two integer numbers
@@ -47,11 +45,6 @@ int op_mul(int num1, int num2)
  */
 int op_div(int num1, int num2)
 {
-	if (num2 == 0)
-	{
-		printf("Error\n");
-		exit(100);
-	}
 	return (num1 / num2);
 }
 
@@ -64,10 +57,5 @@ int op_div(int num1, int num2)
  */
 int op_mod(int num1, int num2)
 {
-	if (num2 == 0)
-	{
-		printf("Error\n");
-		exit(100);
-	}
 	return (num1 % num2);
 }
