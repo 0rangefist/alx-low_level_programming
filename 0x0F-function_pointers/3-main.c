@@ -30,23 +30,22 @@ int main(int argc, char *argv[])
 		exit(98);
 	}
 
-	/* the operator string we get from user will be passed along */
-	/* as an argument so we can get the right operation function */
-	operation = get_op_func(operator);
-
-	/* if the operator contains more than one char, or if the function */
-	/* ptr returned (saved in "operation") is NULL, then it's a bad input */
-	if (strlen(operator) > 1 || operation == NULL)
+	/* if the operator contains more than one char, bad input */
+	if (strlen(operator) > 1)
 	{
 		printf("Error\n");
 		exit(99);
 	}
 
-	/* if user tries to divide or modulo by 0, bad input */
-	if ((operator[0] == '/' || operator[0] == '%') && num2 == 0)
+	/* the operator string we get from user will be passed along */
+	/* as an argument so we can get the right operation function */
+	operation = get_op_func(operator);
+
+	/* If func ptr returned is NULL, then it's a bad input */
+	if (operation == NULL)
 	{
 		printf("Error\n");
-		exit(100);
+		exit(99);
 	}
 
 	/* with the right operation function, run and print its result*/
