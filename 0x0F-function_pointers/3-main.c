@@ -41,13 +41,6 @@ int main(int argc, char *argv[])
 		exit(99);
 	}
 
-	/* if user tries to divide or modulo by 0, bad input */
-	if ((operator[0] == '/' || operator[0] == '%') && num2 == 0)
-	{
-		printf("Error\n");
-		exit(100);
-	}
-
 	/* with the right operation function, run and print its result*/
 	printf("%d\n", operation(num1, num2));
 
