@@ -1,7 +1,6 @@
 #include "3-calc.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 /**
  * main - Entry point
@@ -36,7 +35,7 @@ int main(int argc, char *argv[])
 
 	/* if the operator contains more than one char, or if the function */
 	/* ptr returned (saved in "operation") is NULL, then it's a bad input */
-	if (strlen(operator) > 1 || operation == NULL)
+	if (operator[1] || operation == NULL)
 	{
 		printf("Error\n");
 		exit(99);
