@@ -28,8 +28,8 @@ int pop_listint(listint_t **head)
 	*head = (*head)->next;
 	/* free the original head node */
 	free(original_head);
-	
-	
+
+
 	/*return the data in the deleted original head node */
 	return (original_head_data);
 }
