@@ -6,15 +6,14 @@
  *
  * @head: Address of pointer to the start of the list
  *
- * Return: The address of the new node added
- * OR NULL on failure
+ * Return: void
  */
 void free_listint2(listint_t **head)
 {
-	listint_t *curr_node = *head;
+	listint_t *curr_node = NULL;
 
 	/* address of head ptr is NULL */
-	if (head == NULL)
+	if (head == NULL || *head == NULL)
 	{
 		return;
 	}
