@@ -18,37 +18,37 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 
 	if (head == NULL) /* address of head ptr is NULL */
 		return (NULL);
-
 	/* allocate memory for the new node */
-	new_node = malloc(sizeof(new_node));
+	new_node = malloc(sizeof(listint_t));
 	if (new_node == NULL) /* on alloc fail */
 		return (NULL);
-
 	new_node->n = n; /* set data variable of node */
-
-	if (*head == NULL) /* if head ptr is NULL (list is empty)*/
-	{
-		new_node->next = NULL;
+	if (idx == 0 || *head == NULL)
+	{ /* for insertion at unique case of index 0 or when list is empty */
+		new_node->next = *head;
+		*head = new_node;
 		return (new_node);
 	}
-
 	/* traverse through the list */
 	curr_node = *head;
 	while (curr_node != NULL)
 	{
-		/* check if curr_node_index matches lookup index */
 		if (curr_node_index == idx)
-		{
+		{ /* check if curr_node_index matches lookup index */
 			new_node->next = curr_node;
-			if (curr_node_index > 0) /* for insertions after index 0 */
-				prev_node->next = new_node;
+			prev_node->next = new_node;
 			return (new_node);
 		}
 		prev_node = curr_node; /* set the curr node as the previous node */
 		curr_node = curr_node->next; /* set the next node as the current node */
 		curr_node_index++; /* increment the index */
 	}
-
-	/* if the lookup index is out of range */
+	if (curr_node_index == idx)
+	{ /* handle insertion at the end */
+		new_node->next = curr_node;
+		prev_node->next = new_node;
+		return (new_node);
+	}
+	free(new_node); /* if the lookup index is out of range */
 	return (NULL);
 }
