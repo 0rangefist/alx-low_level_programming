@@ -3,49 +3,48 @@
 /**
  * free_listint_safe - Frees a listint_t list
  *
- * @h: Pointer to the start of the list
+ * @h: Double pointer to the start of the list
  *
- * Return: The size of the list that was free'd
+ * Return: The size of the list that was freed
  */
 size_t free_listint_safe(listint_t **h)
 {
-	size_t		num_of_nodes = 0;
-	listint_t  *curr_node = NULL, *next_node = NULL;
-	listint_t **previously_visited = NULL;
-	size_t		i;
+	/* we use the tortoise & hare algorithm to detect a loop */
+	listint_t *tortoise = *h;
+	listint_t *hare		= *h;
+	listint_t *temp_node = NULL;
+	size_t list_size = 0;
 
-	if (h == NULL) /* head of the list is a NULL pointer */
+	if (h == NULL || *h == NULL) /* there is no list, so no loop*/
 		return (0);
-	curr_node = *h;
-	while (curr_node != NULL)
+
+	/* traverse through the loop with both tortoies & hare */
+	/* hare is the fastest so will reach end of list if no loop */
+	/* thus we check for tortoise && tortoise->next being NULL */
+	while (hare != NULL && hare->next != NULL)
 	{
-		/* check if current node has been visited previously */
-		for (i = 0; i < num_of_nodes; i++)
+		temp_node = tortoise;
+		tortoise = tortoise->next;
+		hare	 = (hare->next)->next;
+		free(temp_node);
+		list_size++;
+		if (tortoise == hare) /* if tortoise == hare, loop detected */
 		{
-			if (curr_node == previously_visited[i])
-			{
-				free(previously_visited);
-				*h = NULL; /* set the head to NULL */
-				return (num_of_nodes);
+			/*reset tortoise to head but leave hare the same*/
+			tortoise = *h;
+			while (tortoise != hare)
+			{ /* increment tortoise & hare till they meet */
+				temp_node = hare;
+				tortoise = tortoise->next;
+				hare	 = hare->next;
+				free(temp_node);
+				list_size++;
 			}
+			/* back to start of cycle/loop */
+			return (list_size);
 		}
-		next_node = curr_node->next;
-		/* allocate memory for the visited node */
-		previously_visited = malloc((num_of_nodes + 1) * sizeof(listint_t *));
-		if (previously_visited == NULL) /* on alloc fail */
-			exit(98);
-		previously_visited[num_of_nodes] = curr_node; /* save the curr visited node*/
-		num_of_nodes++;		   /* increment the number of nodes by 1 */
-		curr_node = next_node; /* set the next node as curr node */
 	}
-	curr_node = *h;
-	while (curr_node != NULL)
-	{
-		next_node = curr_node->next;
-		free(curr_node); /* free the current node */
-		curr_node = next_node;
-	}
-	free(previously_visited);
-	*h = NULL; /* set the head to NULL */
-	return (num_of_nodes);
+	/* return size of freed list without loop */
+	return (list_size);
+
 }
