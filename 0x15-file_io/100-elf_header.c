@@ -1,6 +1,85 @@
 #include "main.h"
 #include <stdio.h>
 
+
+/**
+ * get_system_endianness - Function that returns the endianness
+ * of a system
+ *
+ * Return: 1 if little endian, 2 if big endian.
+ * This matches the values of EI_DATA of an elf header
+ * for little and big endianness.
+ */
+int get_system_endianness(void)
+{
+	/* we create a short int which is 2 bytes long */
+	short int num = 1;
+
+	/* on a big endian system,    num is stored as 00000000 00000001 */
+	/* on a little endian system, num is stored as 00000001 00000000 */
+
+	/* we cast it into a 1 byte char*/
+	char *num_ptr = (char *) &num;
+
+	/* on a big endian system, the casted value takes */
+	/* the MSB which will be 0 (00000000)*/
+	/* on a little endian system, the casted value takes */
+	/* the  LSB which will be (00000001)*/
+
+	if (*num_ptr == 1) /*little endian*/
+		return (1);
+	else /* big endian */
+		return (2);
+}
+
+/**
+ * swap_byte_order_16 - Swaps the byte order of a 16-bit number
+ *
+ * @value: The 16-bit number to swap the byte order of
+ *
+ * Return: The 16-bit number with the byte order swapped
+ */
+uint16_t swap_byte_order_16(uint16_t value)
+{
+	return ((value >> 8) | (value << 8));
+}
+
+/**
+ * swap_byte_order_32 - Swaps the byte order of a 32-bit number
+ *
+ * @value: The 32-bit number to swap the byte order of
+ *
+ * Return: The 32-bit number with the byte order swapped
+ */
+uint32_t swap_byte_order_32(uint32_t value)
+{
+	value = ((value & 0x000000ff) << 24) | ((value & 0x0000ff00) << 8)
+			| ((value & 0x00ff0000) >> 8) | ((value & 0xff000000) >> 24);
+
+	return (value);
+}
+
+/**
+ * swap_byte_order_64 - Swaps the byte order of a 64-bit number
+ *
+ * @value: The 64-bit number to swap the byte order of
+ *
+ * Return: The 64-bit number with the byte order swapped
+ */
+uint64_t swap_byte_order_64(uint64_t value)
+{
+	value = ((value & 0x00000000000000ff) << 56)
+			| ((value & 0x000000000000ff00) << 40)
+			| ((value & 0x0000000000ff0000) << 24)
+			| ((value & 0x00000000ff000000) << 8)
+			| ((value & 0x000000ff00000000) >> 8)
+			| ((value & 0x0000ff0000000000) >> 24)
+			| ((value & 0x00ff000000000000) >> 40)
+			| ((value & 0xff00000000000000) >> 56);
+
+	return (value);
+}
+
 /**
  * print_error - prints error messages to stderr and exits
  * with status 98
@@ -140,9 +219,9 @@ void print_class(uint8_t elf_class)
 void print_data(uint8_t elf_data)
 {
 	printf("  Data:                              ");
-	if (elf_data == ENDIAN_L)
+	if (elf_data == ELFDATA2LSB)
 		printf("2's complement, little endian\n");
-	else if (elf_data == ENDIAN_B)
+	else if (elf_data == ELFDATA2MSB)
 		printf("2's complement, big endian\n");
 }
 
@@ -155,7 +234,7 @@ void print_data(uint8_t elf_data)
 void print_version(uint32_t elf_version)
 {
 	printf("  Version:                           %d", elf_version);
-	if (elf_version > 0)
+	if (elf_version == EV_CURRENT)
 	{
 		printf(" (current)\n");
 	}
@@ -179,7 +258,7 @@ void print_osabi(uint8_t elf_osabi)
 	else if (elf_osabi == ELFOSABI_HPUX)
 		printf("HP-UX\n");
 	else if (elf_osabi == ELFOSABI_NETBSD)
-		printf("NetBSD\n");
+		printf("UNIX - NetBSD\n");
 	else if (elf_osabi == ELFOSABI_LINUX)
 		printf("Linux\n");
 	else if (elf_osabi == ELFOSABI_SOLARIS)
@@ -197,7 +276,7 @@ void print_osabi(uint8_t elf_osabi)
 	else if (elf_osabi == ELFOSABI_STANDALONE)
 		printf("UNIX - Standalone\n");
 	else
-		printf("UNIX - Unknown\n");
+		printf("<unknown: %x>\n", elf_osabi);
 }
 
 /**
@@ -242,6 +321,14 @@ void print_type(uint16_t elf_type)
  */
 void print_elf32_header(elf32_t header32)
 {
+	/* compare endianness of system to elf file. */
+	/* if different, peform byte swaps on muti-byte fields */
+	if (get_system_endianness() != header32.ident[EI_DATA])
+	{
+		header32.version = swap_byte_order_32(header32.version);
+		header32.type	 = swap_byte_order_16(header32.type);
+		header32.entry	 = swap_byte_order_32(header32.entry);
+	}
 	printf("ELF Header:\n");
 	print_magic(header32.ident);
 	print_class(header32.ident[EI_CLASS]);
@@ -261,6 +348,14 @@ void print_elf32_header(elf32_t header32)
  */
 void print_elf64_header(elf64_t header64)
 {
+	/* compare endianness of system to elf file. */
+	/* if different, peform byte swaps on muti-byte fields */
+	if (get_system_endianness() != header64.ident[EI_DATA])
+	{
+		header64.version = swap_byte_order_32(header64.version);
+		header64.type	 = swap_byte_order_16(header64.type);
+		header64.entry	 = swap_byte_order_64(header64.entry);
+	}
 	printf("ELF Header:\n");
 	print_magic(header64.ident);
 	print_class(header64.ident[EI_CLASS]);

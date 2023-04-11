@@ -5,7 +5,6 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <unistd.h>
-
 /**
  * struct elf32_s - matches the data bytes of the first five fields
  * of a 32-bit ELF file header
@@ -80,8 +79,8 @@ typedef struct elf64_s elf64_t;
 #define EI_CLASS_64 2
 
 /* values for EI_DATA*/
-#define ENDIAN_L 1 /* Little endianness */
-#define ENDIAN_B 2 /* Big endianness */
+#define ELFDATA2LSB 1 /* Little endianness */
+#define ELFDATA2MSB 2 /* Big endianness */
 
 /* values for EI_OSABI */
 #define ELFOSABI_SYSV 0			/* UNIX System V ABI */
@@ -107,6 +106,8 @@ typedef struct elf64_s elf64_t;
 #define READ_ERROR 1
 #define NOT_ELF_ERROR 2
 #define BAD_ELF_ERROR 3
+
+#define EV_CURRENT 1 /* the current Elf Version of the system */
 
 int		_putchar(char c);
 ssize_t read_textfile(const char *filename, size_t letters);
