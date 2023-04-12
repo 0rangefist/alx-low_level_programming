@@ -18,10 +18,9 @@
 
 int main(int argc, char *argv[])
 {
-	/* put the arguments supplied by user into variables */
-	int	  num1 = atoi(argv[1]);
-	int	  num2 = atoi(argv[3]);
-	char *operator = argv[2];
+	int	  num1;
+	int	  num2;
+	char *operator;
 	int (*operation)(int, int);
 
 	if (argc != 4) /* if arguments are more than 4, bad input */
@@ -29,6 +28,11 @@ int main(int argc, char *argv[])
 		printf("Error\n");
 		exit(98);
 	}
+
+	/* put the arguments supplied by user into variables */
+	num1 = atoi(argv[1]);
+	num2 = atoi(argv[3]);
+	operator = argv[2];
 
 	/* if the operator contains more than one char, bad input */
 	if (strlen(operator) > 1)
