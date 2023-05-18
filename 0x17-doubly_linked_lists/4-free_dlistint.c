@@ -2,12 +2,12 @@
 
 /**
  * free_dlistint - Frees the memory allocated to a dlistint_t list
- *
  * @head: Pointer to the start of the list
+ * Return: void
  */
 void free_dlistint(dlistint_t *head)
 {
-	dlistint_t *node_to_free;
+	dlistint_t *node_to_free = head;
 
 	if (head == NULL) /* empty list */
 		return;
