@@ -26,15 +26,18 @@ dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
 	new_node->prev = NULL;
 
 	if (*head == NULL) /* empty list */
+	{
+		*head = new_node;
 		return (new_node);
+	}
 
 	tail = *head;
 	while (tail->next != NULL) /* traverse to end of list */
 		tail = tail->next;
 
-	tail->next = new_node; /* old tail next points to new_node */
-	new_node->prev = tail; /* new_node prev points to old tail */
-	tail = new_node; /* update the new_node to be the new tail */
+	tail->next	   = new_node; /* old tail next points to new_node */
+	new_node->prev = tail;	   /* new_node prev points to old tail */
+	tail		   = new_node; /* update the new_node to be the new tail */
 
 	return (tail);
 }
